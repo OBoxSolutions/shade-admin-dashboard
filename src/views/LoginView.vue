@@ -1,5 +1,9 @@
 <template>
-  <div class="login">
-    <login></login>
-  </div>
+  <login class="login"></login>
 </template>
+
+<style scoped>
+.login {
+  height: 100%;
+}
+</style>

@@ -5,6 +5,7 @@
     <v-main class="main">
       <router-view />
     </v-main>
+    <v-footer color="primary" height="64" padless> </v-footer>
   </v-app>
 </template>
 

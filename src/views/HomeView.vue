@@ -1,14 +1,30 @@
 <template>
   <div class="home">
-    <h1>Home page</h1>
+    <messages-table class="table"></messages-table>
   </div>
 </template>
 
 <script>
+import MessagesTable from "@/components/MessagesTable.vue";
 // @ is an alias to /src
 
 export default {
   name: "HomeView",
-  components: {},
+  components: {
+    MessagesTable,
+  },
 };
 </script>
+
+<style scoped>
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table {
+  width: 80%;
+}
+</style>
