@@ -1,10 +1,11 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark> </v-app-bar>
-
-    <v-main class="main">
+    <v-app-bar color="primary" dark app>
+      <!-- <v-toolbar-title>Messages Table</v-toolbar-title> -->
+    </v-app-bar>
+    <v-content>
       <router-view />
-    </v-main>
+    </v-content>
     <v-footer color="primary" height="64" padless> </v-footer>
   </v-app>
 </template>
@@ -15,7 +16,7 @@ export default {
 };
 </script>
 <style scoped>
-.main {
+.content {
   padding: 0 !important;
 }
 </style>

@@ -25,6 +25,7 @@ export default {
   align-items: center;
 }
 .table {
-  width: 80%;
+  /* height: 90%; */
+  width: 90%;
 }
 </style>
