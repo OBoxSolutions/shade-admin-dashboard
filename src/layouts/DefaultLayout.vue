@@ -1,10 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center"></div>
-    </v-app-bar>
+    <v-app-bar app color="primary" dark> </v-app-bar>
 
-    <v-main class="mt-5 ml-5 pr-5 main">
+    <v-main class="main">
       <router-view />
     </v-main>
   </v-app>
@@ -15,3 +13,8 @@ export default {
   name: "HomeLayout",
 };
 </script>
+<style scoped>
+.main {
+  padding: 0 !important;
+}
+</style>
