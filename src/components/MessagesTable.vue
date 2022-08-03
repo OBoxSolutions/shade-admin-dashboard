@@ -23,8 +23,16 @@
       :headers="headers"
       :items="desserts"
       :items-per-page="5"
+      disable-sort
       class="elevation-2"
-    ></v-data-table>
+    >
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small class="mr-2" @click="showMessage(item.id)">
+          mdi-eye
+        </v-icon>
+        <v-icon small @click="deleteMessage(item.id)"> mdi-delete </v-icon>
+      </template></v-data-table
+    >
   </v-container>
 </template>
 
@@ -34,11 +42,12 @@ export default {
     return {
       categories: ["Name", "Social", "Contact", "Message Text"],
       headers: [
-        { text: "Name", align: "start", sortable: false, value: "name" },
-        { text: "Social", sortable: false, value: "social" },
-        { text: "Contact", sortable: false, value: "contact" },
-        { text: "Message", sortable: false, value: "message" },
-        { text: "Date", sortable: false, value: "date" },
+        { text: "Name", align: "start", value: "name" },
+        { text: "Social", value: "social" },
+        { text: "Contact", value: "contact" },
+        { text: "Message", value: "message" },
+        { text: "Date", value: "date" },
+        { text: "Actions", value: "actions" },
       ],
       desserts: [
         {
