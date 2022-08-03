@@ -12,7 +12,7 @@
 
       <v-col class="d-flex" cols="12" sm="6">
         <v-text-field
-          v-model="search"
+          v-model="valueFilter"
           append-icon="mdi-magnify"
           @click:append="filter"
           label="Search"
@@ -27,10 +27,8 @@
       class="elevation-2"
     >
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="showMessage(item.id)">
-          mdi-eye
-        </v-icon>
-        <v-icon small @click="deleteMessage(item.id)"> mdi-delete </v-icon>
+        <v-icon small class="mr-2" @click="showMessage(item)"> mdi-eye </v-icon>
+        <v-icon small @click="deleteMessage(item)"> mdi-delete </v-icon>
       </template></v-data-table
     >
   </v-container>
@@ -40,6 +38,8 @@
 export default {
   data() {
     return {
+      categoryFilter: "",
+      valueFilter: "",
       categories: ["Name", "Social", "Contact", "Message Text"],
       headers: [
         { text: "Name", align: "start", value: "name" },
@@ -126,6 +126,12 @@ export default {
   methods: {
     filter() {
       console.log("filter");
+    },
+    showMessage(item) {
+      console.log(item);
+    },
+    deleteMessage(item) {
+      console.log(item);
     },
   },
 };
