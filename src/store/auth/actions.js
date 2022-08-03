@@ -17,11 +17,7 @@ export const attempt = async ({ commit }, userData) => {
   commit("setToken", access_token)
 
   try {
-    const { data } = await adminApi.get("/user-profile", {
-      headers: {
-        'Authorization': 'Bearer ' + access_token
-      }
-    })
+    const { data } = await adminApi.get("/user-profile")
     commit("setUser", data)
 
     return data
