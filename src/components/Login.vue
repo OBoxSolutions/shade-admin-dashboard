@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from "vuex"
 import Swal from 'sweetalert2'
 
 export default {
@@ -67,7 +67,7 @@ export default {
       }
       else{
         Swal.fire({
-          width: '40%',
+          width: '30%',
           icon: 'error',
           title: 'Error',
           text: msg,
