@@ -5,8 +5,12 @@ export default [
     children: [
       {
         path: "",
-        name: "Home",
-        component: () => import("@/views/HomeView.vue"),
+        redirect: { name: "Dashboard" },
+      },
+      {
+        path: "/dashboard",
+        name: "Dashboard",
+        component: () => import("@/views/DashboardView.vue"),
       },
       {
         path: "/login",

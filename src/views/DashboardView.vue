@@ -9,7 +9,7 @@ import MessagesTable from "@/components/MessagesTable.vue";
 // @ is an alias to /src
 
 export default {
-  name: "HomeView",
+  name: "DashboardView",
   components: {
     MessagesTable,
   },
