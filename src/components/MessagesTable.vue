@@ -1,16 +1,38 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="desserts"
-    :items-per-page="5"
-    class="elevation-1"
-  ></v-data-table>
+  <v-container fluid>
+    <v-row>
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-select
+          v-model="categoryFilter"
+          :items="categories"
+          label="Filter by"
+          clearable
+        ></v-select>
+      </v-col>
+
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          @click:append="filter"
+          label="Search"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      :items-per-page="5"
+      class="elevation-2"
+    ></v-data-table>
+  </v-container>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      categories: ["Name", "Social", "Contact", "Message Text"],
       headers: [
         { text: "Name", align: "start", sortable: false, value: "name" },
         { text: "Social", sortable: false, value: "social" },
@@ -91,6 +113,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    filter() {
+      console.log("filter");
+    },
   },
 };
 </script>
