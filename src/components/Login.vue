@@ -7,9 +7,9 @@
             <v-toolbar-title>Login</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <form ref="form" @submit.prevent="login()">
+            <form ref="form" @submit.prevent="loginUser()">
               <v-text-field
-                v-model="email"
+                v-model="loginForm.email"
                 name="email"
                 label="Email"
                 type="email"
@@ -18,14 +18,14 @@
               ></v-text-field>
 
               <v-text-field
-                v-model="password"
+                v-model="loginForm.password"
                 name="password"
                 label="Password"
                 type="password"
                 placeholder="Enter your password here"
                 required
               ></v-text-field>
-              <v-btn type="submit" class="mt-4" color="primary" value="log in"
+              <v-btn type="submit" class="mt-4" color="primary" value="login"
                 >Login</v-btn
               >
             </form>
@@ -37,18 +37,30 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Login",
   data() {
     return {
-      email: "",
-      password: "",
+      loginForm: {
+        email: '',
+        password: '',
+      },
     };
   },
   methods: {
-    login() {
-      const { email } = this;
-      console.log(email + "logged in");
+    ...mapActions(["login"]),
+    async loginUser() {
+      console.log(this.loginForm)
+      const {status, msg} = await this.login(this.loginForm);
+      if (status) {
+        this.$router.push({ name: "Dashboard" });
+        console.log(msg)
+      }
+      else{
+        console.log(msg)
+      }
     },
   },
 };

@@ -2,15 +2,22 @@ import adminApi from "@/api/admin";
 
 //Login user
 export const login = async ({ commit }, loginData) => {
-  const { data } = await adminApi.post("/login", loginData);
+  console.log(loginData)
+  const { data } = await adminApi.post("/login", loginData)
 
-  commit("loginUser", data);
-};
+  const { status } = data
+
+  if (status === 1){
+    commit("loginUser", data.token);
+  }
+  return data
+}
 
 //Logout current user
 export const logout = async ({ commit }) => {
   const { data } = await adminApi.get("/logout");
 
+  if (status === 1)
   commit("logoutUser", data);
 };
 
