@@ -5,9 +5,12 @@ import store from "./store"
 import vuetify from "./plugins/vuetify"
 import "./plugins"
 
-import ('@/store/auth/logged')
+
+import ('@/store/auth/subscriber')
 
 Vue.config.productionTip = false;
+
+store.dispatch('auth/attempt', localStorage.getItem('token'))
 
 new Vue({
   router,

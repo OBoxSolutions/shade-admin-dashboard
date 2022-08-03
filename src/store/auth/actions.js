@@ -7,17 +7,25 @@ export const login = async ({ dispatch }, loginData) => {
   const { status } = data
 
   if (status === 1){
-    dispatch("attempt", data)
+    dispatch("attempt", data.access_token)
   }
   return data
 }
 
-export const attempt = async ({ commit }, userData) => {
-  const { access_token } = userData
-  commit("setToken", access_token)
+export const attempt = async ({ commit, state }, token) => {
+  if(token){
+    commit("setToken", token)
+  }
+  if(!state.token){
+    return
+  }
 
   try {
-    const { data } = await adminApi.get("/user-profile")
+    const { data } = await adminApi.get("/user-profile", {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     commit("setUser", data)
 
     return data
