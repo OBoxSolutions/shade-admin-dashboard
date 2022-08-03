@@ -38,6 +38,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import Swal from 'sweetalert2'
 
 export default {
   name: "Login",
@@ -52,14 +53,25 @@ export default {
   methods: {
     ...mapActions(["login"]),
     async loginUser() {
-      console.log(this.loginForm)
+      new Swal({
+          width: '30%',
+          title: 'Wait please',
+          allowOutsideClick: false
+      })
+      Swal.showLoading()
+
       const {status, msg} = await this.login(this.loginForm);
       if (status) {
+        Swal.close()
         this.$router.push({ name: "Dashboard" });
-        console.log(msg)
       }
       else{
-        console.log(msg)
+        Swal.fire({
+          width: '40%',
+          icon: 'error',
+          title: 'Error',
+          text: msg,
+        })
       }
     },
   },

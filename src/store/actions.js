@@ -2,7 +2,6 @@ import adminApi from "@/api/admin";
 
 //Login user
 export const login = async ({ commit }, loginData) => {
-  console.log(loginData)
   const { data } = await adminApi.post("/login", loginData)
 
   const { status } = data
