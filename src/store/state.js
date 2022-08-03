@@ -1,5 +1,5 @@
 export default () => ({
-  token: '',
+  token: null,
   user: null,
   messages: [],
 });

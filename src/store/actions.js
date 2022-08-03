@@ -27,7 +27,8 @@ export const attempt = async ({ commit }, userData) => {
     return data
 
   } catch (error) {
-    console.log('failure')
+    commit("setToken", null)
+    commit("setUser", null)
   }
 }
 
