@@ -20,7 +20,7 @@ import { mapGetters } from "vuex"
 export default {
   name: "DefaultLayout",
    computed: {
-        ...mapGetters(['authenticated', 'user']),
+        ...mapGetters('auth', ['authenticated', 'user']),
    }
 }
 </script>

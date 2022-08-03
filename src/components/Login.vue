@@ -51,7 +51,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions('auth', ["login"]),
     async loginUser() {
       new Swal({
           width: '30%',
