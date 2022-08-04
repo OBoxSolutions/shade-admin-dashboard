@@ -63,7 +63,7 @@ export default {
       const {status, msg} = await this.login(this.loginForm);
       if (status) {
         Swal.close()
-        this.$router.push({ name: "Dashboard" });
+        this.$router.push({ name: "Dashboard" })
       }
       else{
         Swal.fire({

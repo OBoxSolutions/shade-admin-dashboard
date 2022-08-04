@@ -14,18 +14,22 @@ export const login = async ({ dispatch }, loginData) => {
 
 export const attempt = async ({ commit, state }, token) => {
   if(token){
-    await commit("setToken", token)
+    commit("setToken", token)
   }
   if(!state.token){
     return
   }
 
+  adminApi.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  
   try {
     const { data } = await adminApi.get("/user-profile", {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
+      // headers: {
+        //   'Authorization': 'Bearer ' + token
+        // }
+      })
+
+    localStorage.setItem('token', token)
     commit("setUser", data)
 
     return data
@@ -38,8 +42,20 @@ export const attempt = async ({ commit, state }, token) => {
 
 //Logout current user
 export const logout = async ({ commit }) => {
-  const { data } = await adminApi.get("/logout");
+  const { data } = await adminApi.get("/logout", {
+    // headers: {
+    //   'Authorization': 'Bearer ' + state.token
+    // }
+  });
 
-  if (status === 1)
-  commit("logoutUser", data);
+  if (data.status === 1){
+    commit("setToken", null)
+    commit("setUser", null)
+
+    adminApi.defaults.headers.common['Authorization'] = null
+    localStorage.removeItem('token')
+
+    return true
+  }
+  return false
 }
