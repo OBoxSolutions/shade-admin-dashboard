@@ -1,3 +1,5 @@
+import store from "@/store"
+
 export default [
   {
     path: "/",
@@ -11,6 +13,14 @@ export default [
         path: "/dashboard",
         name: "Dashboard",
         component: () => import("@/views/DashboardView.vue"),
+        beforeEnter: (to, from, next) => {
+          if(!store.getters['auth/authenticated']){
+            return next({
+              name: 'Login'
+            })
+          }
+          next()
+        }
       },
       {
         path: "/login",

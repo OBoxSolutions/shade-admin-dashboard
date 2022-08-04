@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from "vuex"
+
 export default {
   name: "MessagesTable",
   data() {
@@ -124,6 +126,11 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters('auth', ['authenticated', 'user']),
+    ...mapState('auth', ['isLogged'])
+    },
+  
   methods: {
     filter() {
       console.log("filter");

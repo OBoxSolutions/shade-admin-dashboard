@@ -7,14 +7,14 @@ export const login = async ({ dispatch }, loginData) => {
   const { status } = data
 
   if (status === 1){
-    dispatch("attempt", data.access_token)
+    await dispatch("attempt", data.access_token)
   }
   return data
 }
 
 export const attempt = async ({ commit, state }, token) => {
   if(token){
-    commit("setToken", token)
+    await commit("setToken", token)
   }
   if(!state.token){
     return

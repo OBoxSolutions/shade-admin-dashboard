@@ -10,11 +10,12 @@ import ('@/store/auth/subscriber')
 
 Vue.config.productionTip = false;
 
-store.dispatch('auth/attempt', localStorage.getItem('token'))
+store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
+  new Vue({
+    router,
+    store,
+    vuetify,
+    render: (h) => h(App),
+  }).$mount("#app");
+})
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: (h) => h(App),
-}).$mount("#app");
