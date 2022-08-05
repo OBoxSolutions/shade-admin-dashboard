@@ -6,7 +6,7 @@ import vuetify from "./plugins/vuetify"
 import "./plugins"
 
 
-import ('@/store/auth/subscriber')
+// import ('@/store/auth/subscriber')
 
 Vue.config.productionTip = false;
 

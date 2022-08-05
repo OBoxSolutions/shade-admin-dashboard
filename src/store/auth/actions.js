@@ -31,9 +31,7 @@ export const attempt = async ({ commit, state }, token) => {
 
     localStorage.setItem('token', token)
     commit("setUser", data)
-
-    return data
-
+    
   } catch (error) {
     commit("setToken", null)
     commit("setUser", null)
@@ -57,5 +55,7 @@ export const logout = async ({ commit }) => {
 
     return true
   }
-  return false
+  else{
+    return false
+  }
 }
