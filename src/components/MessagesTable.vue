@@ -34,16 +34,20 @@
         <v-icon small class="mr-2" @click="showMessage(item)"> mdi-eye </v-icon>
         <v-icon small @click="deleteMessage(item)"> mdi-delete </v-icon>
       </template>
-      </v-data-table
-    >
+      </v-data-table>
+      <paginate v-if="!loading" />
   </v-container>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex"
+import Paginate from './Paginate.vue'
 
 export default {
   name: "MessagesTable",
+  components: {
+    Paginate
+  },
   data() {
     return {
       categoryFilter: "",
@@ -62,7 +66,7 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['authenticated', 'user']),
-    ...mapGetters('messages', ['getAllMessages']),
+    ...mapGetters('messages', ['getAllMessages']), 
     messages: {
       get(){
         return this.getAllMessages.data
@@ -82,7 +86,7 @@ export default {
     },
   },
   async created(){
-    await this.loadAllMessages()
+    await this.loadAllMessages(1)
     this.loading = false
   }
 }

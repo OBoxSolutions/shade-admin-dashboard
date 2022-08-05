@@ -1,10 +1,10 @@
 import adminApi from "@/api/admin";
 
-//Get all the messages
-export const loadAllMessages = async ({ commit }) => {
-  const {data} = await adminApi.get("/messages");
+//Get all the messages with server-side pagination
+export const loadAllMessages = async ({ commit }, pageNumber) => {
+  const {data} = await adminApi.get("/messages?page=" + pageNumber);
 
-  await commit("setAllMessages", data);
+  commit("setAllMessages", data);
 };
 
 //Get specific message

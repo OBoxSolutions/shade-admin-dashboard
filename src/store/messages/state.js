@@ -1,3 +1,4 @@
 export default () => ({
-  allMessages: [],
+  messages: {},
+  currentPage: 1
 });
