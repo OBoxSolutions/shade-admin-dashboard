@@ -6,8 +6,3 @@ export const setToken = (state, token) => {
   export const setUser = (state, user) => {
     state.user = user
   }
-  
-  //Set messages
-  export const setAllMessages = (state, messages) => {
-    state.messages = [...messages];
-  };

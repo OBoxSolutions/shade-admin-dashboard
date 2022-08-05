@@ -2,9 +2,9 @@ import adminApi from "@/api/admin";
 
 //Get all the messages
 export const loadAllMessages = async ({ commit }) => {
-  const { data } = await adminApi.get("/messages");
+  const {data} = await adminApi.get("/messages");
 
-  commit("setAllMessages", data);
+  await commit("setAllMessages", data);
 };
 
 //Get specific message
