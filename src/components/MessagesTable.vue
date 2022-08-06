@@ -31,8 +31,8 @@
       No messages found
     </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="showMessage(item)"> mdi-eye </v-icon>
-        <v-icon small @click="deleteMessage(item)"> mdi-delete </v-icon>
+        <v-icon small class="mr-2" @click="showSelectedMessage(item)"> mdi-eye </v-icon>
+        <v-icon small @click="deleteSelectedMessage(item)"> mdi-delete </v-icon>
       </template>
       </v-data-table>
       <paginate v-if="!loading" />
@@ -42,6 +42,8 @@
 <script>
 import { mapActions, mapGetters } from "vuex"
 import Paginate from './Paginate.vue'
+import Swal from 'sweetalert2'
+
 
 export default {
   name: "MessagesTable",
@@ -66,7 +68,7 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['authenticated', 'user']),
-    ...mapGetters('messages', ['getAllMessages']), 
+    ...mapGetters('messages', ['getAllMessages', 'getCurrentPage']), 
     messages: {
       get(){
         return this.getAllMessages.data
@@ -74,15 +76,35 @@ export default {
     }
   },
   methods: {
-    ...mapActions('messages', ['loadAllMessages']),
+    ...mapActions('messages', ['loadAllMessages', 'deleteMessage']),
     filter() {
-      console.log("filter");
+      console.log("filter")
     },
-    showMessage(item) {
-      console.log(item);
+    showSelectedMessage(item) {
+      console.log(item)
     },
-    deleteMessage(item) {
-      console.log(item);
+    async deleteSelectedMessage(item) {
+      const {isConfirmed} = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'Once deleted, it cannot be restored',
+                showDenyButton: true,
+                confirmButtonText: 'Yes, I am sure'
+            })
+      if(isConfirmed){
+        new Swal({
+            title: 'Wait please',
+            allowOutsideClick: false
+        })
+        Swal.showLoading()
+        const {success, msg} = await this.deleteMessage(item.id)
+        this.loadAllMessages(this.getCurrentPage)
+        if(success === 1){
+          Swal.fire(msg,'', 'success')
+        }
+        else{
+          Swal.fire(msg,'', 'error')
+        }
+      }
     },
   },
   async created(){

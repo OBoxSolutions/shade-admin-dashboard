@@ -15,10 +15,9 @@ export const loadMessage = async ({ commit }, message) => {
 };
 
 //Delete specific message
-export const deleteMessage = async ({ commit }, message) => {
+export const deleteMessage = async (_, message) => {
   const { data } = await adminApi.delete(`/messages/${message}`);
-
-  commit("deleteMessage", data);
+  return data
 };
 
 //Filter messages
