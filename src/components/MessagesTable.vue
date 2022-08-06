@@ -3,7 +3,7 @@
     <v-row>
       <v-col class="d-flex" cols="12" sm="6">
         <v-select
-          v-model="categoryFilter"
+          v-model="filterData.category"
           :items="categories"
           label="Filter by"
           clearable
@@ -12,7 +12,7 @@
 
       <v-col class="d-flex" cols="12" sm="6">
         <v-text-field
-          v-model="valueFilter"
+          v-model="filterData.value"
           append-icon="mdi-magnify"
           @click:append="filter"
           label="Search"
@@ -25,7 +25,7 @@
       hide-default-footer
       class="elevation-2"
       :loading="loading"
-      loading-text="Messages loading..."
+      loading-text="Loading messages..."
     >
     <template slot="no-data">
       No messages found
@@ -52,9 +52,17 @@ export default {
   },
   data() {
     return {
-      categoryFilter: "",
-      valueFilter: "",
-      categories: ["Name", "Social", "Contact", "Message Text"],
+      filterData: {
+        category: "",
+        value: "",
+        pageNumber: this.getCurrentPage
+      },
+      categories: [
+        { text: "Name", value: "name" },
+        { text: "Social", value: "social" },
+        { text: "Contact", value: "contact" },
+        { text: "Message Text", value: "text" },
+        ],
       loading: true,
       headers: [
         { text: "Name", align: "start", value: "name" },
@@ -68,7 +76,7 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['authenticated', 'user']),
-    ...mapGetters('messages', ['getAllMessages', 'getCurrentPage']), 
+    ...mapGetters('messages', ['getAllMessages', 'getCurrentPage', 'isFiltered', 'getFilterData']), 
     messages: {
       get(){
         return this.getAllMessages.data
@@ -76,10 +84,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('messages', ['loadAllMessages', 'deleteMessage']),
-    filter() {
-      console.log("filter")
+    ...mapActions('messages', ['loadAllMessages', 'deleteMessage', 'filterMessages']),
+
+    async filter() {
+      await this.filterMessages(this.filterData)
     },
+
     showSelectedMessage(item) {
       console.log(item)
     },
@@ -97,7 +107,12 @@ export default {
         })
         Swal.showLoading()
         const {success, msg} = await this.deleteMessage(item.id)
-        this.loadAllMessages(this.getCurrentPage)
+        if(!this.isFiltered){
+          this.loadAllMessages(this.getCurrentPage)
+        }
+        else{
+          this.filterMessages(this.getFilterData)
+        }
         if(success === 1){
           Swal.fire(msg,'', 'success')
         }

@@ -4,6 +4,7 @@ import adminApi from "@/api/admin";
 export const loadAllMessages = async ({ commit }, pageNumber) => {
   const {data} = await adminApi.get("/messages?page=" + pageNumber);
 
+  commit("setFiltered", false)
   commit("setAllMessages", data);
 };
 
@@ -21,8 +22,10 @@ export const deleteMessage = async (_, message) => {
 };
 
 //Filter messages
-export const filter = async ({ commit }, filterData) => {
-  const { data } = await adminApi.post("/filter", filterData);
-
-  commit("setFilterMessages", data);
+export const filterMessages = async ({ commit }, {category, value, pageNumber} ) => {
+  const { data } = await adminApi.post("/messages/filter?page=" + pageNumber, {category, value});
+  
+  commit("setFilterData", {category, value, pageNumber})
+  commit("setFiltered", true)
+  commit("setAllMessages", data);
 };
