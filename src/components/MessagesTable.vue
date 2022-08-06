@@ -25,7 +25,7 @@
       hide-default-footer
       class="elevation-2"
       :loading="loading"
-      loading-text="Messages laoding..."
+      loading-text="Messages loading..."
     >
     <template slot="no-data">
       No messages found
