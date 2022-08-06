@@ -25,7 +25,8 @@ export const deleteMessage = async (_, message) => {
 export const filterMessages = async ({ commit }, {category, value, pageNumber} ) => {
   const { data } = await adminApi.post("/messages/filter?page=" + pageNumber, {category, value});
   
-  commit("setFilterData", {category, value, pageNumber})
+  
+  commit("setFilterData", {category, value, pageNumber}) 
   commit("setFiltered", true)
   commit("setAllMessages", data);
 };

@@ -55,7 +55,7 @@ export default {
       filterData: {
         category: "",
         value: "",
-        pageNumber: this.getCurrentPage
+        pageNumber: this.getCurrentPage || 1
       },
       categories: [
         { text: "Name", value: "name" },
