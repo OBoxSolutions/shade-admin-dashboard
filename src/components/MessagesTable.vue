@@ -53,7 +53,7 @@
       </template>
 
       <template v-slot:[`item.text`]="{ item }">
-        <p v-if="item.text.length > 80">{{item.text.substring(0, 100)}}...</p>
+        <p v-if="item.text.length > 200">{{item.text.substring(0, 200)}}...</p>
         <p v-else>{{item.text}}</p>
       </template>
 
