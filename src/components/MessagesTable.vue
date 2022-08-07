@@ -99,7 +99,7 @@ export default {
         { text: "Social", value: "social", sortable: false },
         { text: "Contact", value: "contact", sortable: false },
         { text: "Message", value: "text", sortable: false },
-        { text: "Date", value: "created_at", sortable: true },
+        { text: "Date", value: "created_at", sortable: false },
         { text: "Actions", value: "actions", sortable: false },
       ],
     }
