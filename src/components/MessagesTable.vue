@@ -30,9 +30,8 @@
             <v-icon>mdi-cached</v-icon>
           </v-btn>
       </v-col>
-
-
     </v-row>
+
     <v-data-table
       :headers="headers"
       :items="messages"
@@ -41,21 +40,32 @@
       :loading="loading"
       loading-text="Loading messages..."
     >
-    <template slot="no-data">
-      No messages found
-    </template>
-    <template v-slot:[`item.social`]="{ item }">
-      <v-icon v-if="item.social == 'Messanger'">mdi-facebook</v-icon>
-      <v-icon v-if="item.social == 'Instagram'">mdi-instagram</v-icon>
-      <v-icon v-if="item.social == 'Discord'">mdi-discord</v-icon>
-      <v-icon v-if="item.social == 'Email'">mdi-gmail</v-icon>
-    </template>
+
+      <template slot="no-data">
+        No messages found
+      </template>
+
+      <template v-slot:[`item.social`]="{ item }">
+        <v-icon v-if="item.social === 'Messanger'">mdi-facebook</v-icon>
+        <v-icon v-if="item.social === 'Instagram'">mdi-instagram</v-icon>
+        <v-icon v-if="item.social === 'Discord'">mdi-discord</v-icon>
+        <v-icon v-if="item.social === 'Email'">mdi-gmail</v-icon>
+      </template>
+
+      <template v-slot:[`item.text`]="{ item }">
+        <p v-if="item.text.length > 80">{{item.text.substring(0, 100)}}...</p>
+        <p v-else>{{item.text}}</p>
+      </template>
+
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="showSelectedMessage(item)"> mdi-eye </v-icon>
         <v-icon small @click="deleteSelectedMessage(item)"> mdi-delete </v-icon>
       </template>
-      </v-data-table>
-      <paginate v-if="!loading" />
+
+    </v-data-table>
+
+    <paginate v-if="!loading" />
+
   </v-container>
 </template>
 
