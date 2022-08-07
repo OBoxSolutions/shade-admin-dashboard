@@ -54,7 +54,7 @@ export default {
     ...mapActions('auth', ["login"]),
     async loginUser() {
       new Swal({
-          width: '30%',
+          width: '50%',
           title: 'Wait please',
           allowOutsideClick: false
       })
@@ -67,7 +67,7 @@ export default {
       }
       else{
         Swal.fire({
-          width: '30%',
+          width: '50%',
           icon: 'error',
           title: 'Error',
           text: msg,
