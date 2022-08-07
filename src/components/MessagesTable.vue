@@ -17,7 +17,20 @@
           @click:append="filter"
           label="Search"
         ></v-text-field>
+          <v-btn
+            @click="clearFilter"
+            icon
+            class="ma-2"
+            outlined
+            fab
+            small
+            color="primary"
+          >
+            <v-icon>mdi-cached</v-icon>
+          </v-btn>
       </v-col>
+
+
     </v-row>
     <v-data-table
       :headers="headers"
@@ -87,9 +100,18 @@ export default {
     ...mapActions('messages', ['loadAllMessages', 'deleteMessage', 'filterMessages']),
 
     async filter() {
+      this.loading = true
       await this.filterMessages(this.filterData)
-    },
+      this.loading = false
 
+    },
+    async clearFilter(){
+      this.loading = true
+      await this.loadAllMessages(1)
+      this.filterData.category = ''
+      this.filterData.value = ''
+      this.loading = false
+    },
     showSelectedMessage(item) {
       console.log(item)
     },
