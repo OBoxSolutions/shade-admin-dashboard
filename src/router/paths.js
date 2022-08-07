@@ -26,6 +26,14 @@ export default [
         path: "/login",
         name: "Login",
         component: () => import("@/views/LoginView.vue"),
+        beforeEnter: (to, from, next) => {
+          if(store.getters['auth/authenticated']){
+            return next({
+              name: 'Dashboard'
+            })
+          }
+          next()
+        }
       },
     ],
   },

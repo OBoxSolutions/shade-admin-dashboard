@@ -16,7 +16,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('messages', ['getAllMessages', 'getCurrentPage']),
+        ...mapGetters('messages', ['getAllMessages', 'getCurrentPage', 'isFiltered', 'getFilterData']),
         currentPage: {
             get(){
                 return this.getCurrentPage
@@ -32,11 +32,19 @@ export default {
         }
     },
     methods: {
-        ...mapMutations('messages', ['setCurrentPage']),
-        ...mapActions('messages', ['loadAllMessages']),
+        ...mapMutations('messages', ['setCurrentPage', 'setFilterData']),
+        ...mapActions('messages', ['loadAllMessages', 'filterMessages']),
         async paginatePage(pageNumber){
             this.loading = true
-            await this.loadAllMessages(pageNumber)
+            if (!this.isFiltered){
+                await this.loadAllMessages(pageNumber)
+            }
+            else{
+                const filterData = this.getFilterData
+                filterData.pageNumber = pageNumber
+                this.setFilterData(filterData)
+                await this.filterMessages(filterData)
+            }
             this.loading = false
         }
     }

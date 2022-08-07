@@ -1,4 +1,5 @@
 export default () => ({
   messages: {},
-  currentPage: 1
+  filterData: {},
+  filtered: false
 });
