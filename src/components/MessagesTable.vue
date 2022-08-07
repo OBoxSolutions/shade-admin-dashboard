@@ -46,10 +46,10 @@
       </template>
 
       <template v-slot:[`item.social`]="{ item }">
-        <v-icon v-if="item.social === 'Messanger'">mdi-facebook</v-icon>
+        <v-icon v-if="item.social === 'Messanger'">mdi-facebook-messenger</v-icon>
         <v-icon v-if="item.social === 'Instagram'">mdi-instagram</v-icon>
         <v-icon v-if="item.social === 'Discord'">mdi-discord</v-icon>
-        <v-icon v-if="item.social === 'Email'">mdi-gmail</v-icon>
+        <v-icon v-if="item.social === 'Email'">mdi-email</v-icon>
       </template>
 
       <template v-slot:[`item.text`]="{ item }">
