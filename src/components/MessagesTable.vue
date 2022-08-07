@@ -14,6 +14,7 @@
         <v-text-field
           v-model="filterData.value"
           append-icon="mdi-magnify"
+          @keyup.enter="filter"
           @click:append="filter"
           label="Search"
         ></v-text-field>
@@ -42,6 +43,12 @@
     >
     <template slot="no-data">
       No messages found
+    </template>
+    <template v-slot:[`item.social`]="{ item }">
+      <v-icon v-if="item.social == 'Messanger'">mdi-facebook</v-icon>
+      <v-icon v-if="item.social == 'Instagram'">mdi-instagram</v-icon>
+      <v-icon v-if="item.social == 'Discord'">mdi-discord</v-icon>
+      <v-icon v-if="item.social == 'Email'">mdi-gmail</v-icon>
     </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="showSelectedMessage(item)"> mdi-eye </v-icon>
@@ -78,12 +85,12 @@ export default {
         ],
       loading: true,
       headers: [
-        { text: "Name", align: "start", value: "name" },
-        { text: "Social", value: "social" },
-        { text: "Contact", value: "contact" },
-        { text: "Message", value: "text" },
-        { text: "Date", value: "created_at" },
-        { text: "Actions", value: "actions" },
+        { text: "Name", align: "start", value: "name", sortable: false },
+        { text: "Social", value: "social", sortable: false },
+        { text: "Contact", value: "contact", sortable: false },
+        { text: "Message", value: "text", sortable: false },
+        { text: "Date", value: "created_at", sortable: true },
+        { text: "Actions", value: "actions", sortable: false },
       ],
     }
   },
