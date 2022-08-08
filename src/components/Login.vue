@@ -54,8 +54,8 @@ export default {
     ...mapActions('auth', ["login"]),
     async loginUser() {
       new Swal({
-          width: '30%',
-          title: 'Wait please',
+          // width: '80%',
+          title: 'Please wait',
           allowOutsideClick: false
       })
       Swal.showLoading()
@@ -67,7 +67,7 @@ export default {
       }
       else{
         Swal.fire({
-          width: '30%',
+          // width: '80%',
           icon: 'error',
           title: 'Error',
           text: msg,
