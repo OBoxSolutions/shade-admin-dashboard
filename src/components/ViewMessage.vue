@@ -23,7 +23,7 @@
         </v-icon>
 
         <v-list-item-content>
-          <v-list-item-subtitle>{{message.created_at}}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{getDate(message.created_at)}}</v-list-item-subtitle>
         </v-list-item-content>
 
         <v-row
@@ -44,7 +44,14 @@
 </template>
 
 <script>
+import getDate from "@/helpers/getDate";
+
 export default {
+    data() {
+        return {
+            getDate
+        }
+    },
     props: {
         message: {
             type: Object,

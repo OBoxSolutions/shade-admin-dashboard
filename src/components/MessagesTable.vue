@@ -64,6 +64,10 @@
         <p v-else>{{item.text}}</p>
       </template>
 
+      <template v-slot:[`item.created_at`]="{ item }">
+        <p>{{getDate(item.created_at)}}</p>
+      </template>
+
 
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="showSelectedMessage(item)"> mdi-eye </v-icon>
@@ -84,6 +88,8 @@ import Paginate from './Paginate.vue'
 import Swal from 'sweetalert2'
 import ViewMessage from './ViewMessage.vue'
 
+import getDate from "@/helpers/getDate";
+
 
 export default {
   name: "MessagesTable",
@@ -93,6 +99,7 @@ export default {
   },
   data() {
     return {
+      getDate,
       filterData: {
         category: "",
         value: "",
@@ -119,7 +126,7 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['authenticated', 'user']),
-    ...mapGetters('messages', ['getAllMessages', 'getCurrentPage', 'isFiltered', 'getFilterData']), 
+    ...mapGetters('messages', ['getAllMessages', 'getCurrentPage', 'isFiltered', 'getFilterData']),
     messages: {
       get(){
         return this.getAllMessages.data
@@ -130,7 +137,6 @@ export default {
     ...mapActions('messages', ['loadAllMessages', 'deleteMessage', 'filterMessages']),
 
     closeViewMessage(){
-      console.log('hola')
       this.viewDialog = false
     },
     async filter() {
