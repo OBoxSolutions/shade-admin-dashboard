@@ -53,10 +53,7 @@
       </template>
 
       <template v-slot:[`item.social`]="{ item }">
-        <v-icon v-if="item.social === 'Messanger'">mdi-facebook-messenger</v-icon>
-        <v-icon v-if="item.social === 'Instagram'">mdi-instagram</v-icon>
-        <v-icon v-if="item.social === 'Discord'">mdi-discord</v-icon>
-        <v-icon v-if="item.social === 'Email'">mdi-email</v-icon>
+        <social-icon :social="item.social"></social-icon>
       </template>
 
       <template v-slot:[`item.text`]="{ item }">
@@ -89,13 +86,15 @@ import Swal from 'sweetalert2'
 import ViewMessage from './ViewMessage.vue'
 
 import getDate from "@/helpers/getDate";
+import SocialIcon from './SocialIcon.vue'
 
 
 export default {
   name: "MessagesTable",
   components: {
     Paginate,
-    ViewMessage
+    ViewMessage,
+    SocialIcon
   },
   data() {
     return {

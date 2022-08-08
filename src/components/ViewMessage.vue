@@ -3,12 +3,7 @@
     class="mx-auto"
   >
     <v-card-title>
-      <v-icon
-        large
-        left
-      >
-        mdi-discord
-      </v-icon>
+        <social-icon :social="message.social"></social-icon>
       <span class="font-weight-light">{{message.name}}</span>
     </v-card-title>
 
