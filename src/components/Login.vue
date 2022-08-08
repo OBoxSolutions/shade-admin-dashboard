@@ -55,7 +55,7 @@ export default {
     async loginUser() {
       new Swal({
           // width: '80%',
-          title: 'Wait please',
+          title: 'Please wait',
           allowOutsideClick: false
       })
       Swal.showLoading()
