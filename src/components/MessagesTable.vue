@@ -1,5 +1,13 @@
 <template>
   <v-container fluid>
+    <v-dialog 
+      
+      v-model="viewDialog"
+      transition="dialog-top-transition" 
+      max-width="500px"
+      >
+      <view-message :message="selectedMessage" @close="closeViewMessage"></view-message>
+    </v-dialog>
     <v-row>
       <v-col class="d-flex" cols="12" sm="6">
         <v-select
@@ -40,27 +48,29 @@
       :loading="loading"
       loading-text="Loading messages..."
     >
-
       <template slot="no-data">
         No messages found
       </template>
 
       <template v-slot:[`item.social`]="{ item }">
-        <v-icon v-if="item.social === 'Messanger'">mdi-facebook-messenger</v-icon>
-        <v-icon v-if="item.social === 'Instagram'">mdi-instagram</v-icon>
-        <v-icon v-if="item.social === 'Discord'">mdi-discord</v-icon>
-        <v-icon v-if="item.social === 'Email'">mdi-email</v-icon>
+        <social-icon :social="item.social"></social-icon>
       </template>
 
       <template v-slot:[`item.text`]="{ item }">
-        <p v-if="item.text.length > 200">{{item.text.substring(0, 200)}}...</p>
+        <p v-if="item.text.length > 150">{{item.text.substring(0, 150)}}...</p>
         <p v-else>{{item.text}}</p>
       </template>
+
+      <template v-slot:[`item.created_at`]="{ item }">
+        <p>{{getDate(item.created_at)}}</p>
+      </template>
+
 
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="showSelectedMessage(item)"> mdi-eye </v-icon>
         <v-icon small @click="deleteSelectedMessage(item)"> mdi-delete </v-icon>
       </template>
+
 
     </v-data-table>
 
@@ -73,15 +83,22 @@
 import { mapActions, mapGetters } from "vuex"
 import Paginate from './Paginate.vue'
 import Swal from 'sweetalert2'
+import ViewMessage from './ViewMessage.vue'
+
+import getDate from "@/helpers/getDate";
+import SocialIcon from './SocialIcon.vue'
 
 
 export default {
   name: "MessagesTable",
   components: {
-    Paginate
+    Paginate,
+    ViewMessage,
+    SocialIcon
   },
   data() {
     return {
+      getDate,
       filterData: {
         category: "",
         value: "",
@@ -102,11 +119,13 @@ export default {
         { text: "Date", value: "created_at", sortable: false },
         { text: "Actions", value: "actions", sortable: false },
       ],
+      viewDialog: false,
+      selectedMessage: null
     }
   },
   computed: {
     ...mapGetters('auth', ['authenticated', 'user']),
-    ...mapGetters('messages', ['getAllMessages', 'getCurrentPage', 'isFiltered', 'getFilterData']), 
+    ...mapGetters('messages', ['getAllMessages', 'getCurrentPage', 'isFiltered', 'getFilterData']),
     messages: {
       get(){
         return this.getAllMessages.data
@@ -116,6 +135,9 @@ export default {
   methods: {
     ...mapActions('messages', ['loadAllMessages', 'deleteMessage', 'filterMessages']),
 
+    closeViewMessage(){
+      this.viewDialog = false
+    },
     async filter() {
       this.loading = true
       await this.filterMessages(this.filterData)
@@ -130,7 +152,8 @@ export default {
       this.loading = false
     },
     showSelectedMessage(item) {
-      console.log(item)
+      this.selectedMessage = item
+      this.viewDialog = true
     },
     async deleteSelectedMessage(item) {
       const {isConfirmed} = await Swal.fire({
