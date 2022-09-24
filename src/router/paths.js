@@ -1,4 +1,4 @@
-import store from "@/store"
+import store from "@/store";
 
 export default [
   {
@@ -14,29 +14,41 @@ export default [
         name: "Dashboard",
         component: () => import("@/views/DashboardView.vue"),
         beforeEnter: (to, from, next) => {
-          if(!store.getters['auth/authenticated']){
+          if (!store.getters["auth/authenticated"]) {
             return next({
-              name: 'Login'
-            })
+              name: "Login",
+            });
           }
-          next()
-        }
+          next();
+        },
       },
+    ],
+  },
+  {
+    path: "/",
+    component: () => import("@/layouts/AuthLayout.vue"),
+    children: [
+      {
+        path: "",
+        redirect: { name: "Dashboard" },
+      },
+
       {
         path: "/login",
         name: "Login",
         component: () => import("@/views/LoginView.vue"),
         beforeEnter: (to, from, next) => {
-          if(store.getters['auth/authenticated']){
+          if (store.getters["auth/authenticated"]) {
             return next({
-              name: 'Dashboard'
-            })
+              name: "Dashboard",
+            });
           }
-          next()
-        }
+          next();
+        },
       },
     ],
   },
+
   {
     path: "/404",
     name: "404",
