@@ -2,6 +2,7 @@
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
+        <img src="@/assets/logo.svg" class="mb-6 mx-6" alt="" />
         <v-card class="elevation-12">
           <v-toolbar dark color="primary">
             <v-toolbar-title>Login</v-toolbar-title>
@@ -37,41 +38,40 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
-import Swal from 'sweetalert2'
+import { mapActions } from "vuex";
+import Swal from "sweetalert2";
 
 export default {
   name: "Login",
   data() {
     return {
       loginForm: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
     };
   },
   methods: {
-    ...mapActions('auth', ["login"]),
+    ...mapActions("auth", ["login"]),
     async loginUser() {
       new Swal({
-          // width: '80%',
-          title: 'Please wait',
-          allowOutsideClick: false
-      })
-      Swal.showLoading()
+        // width: '80%',
+        title: "Please wait",
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
 
-      const {status, msg} = await this.login(this.loginForm);
+      const { status, msg } = await this.login(this.loginForm);
       if (status) {
-        Swal.close()
-        this.$router.push({ name: "Dashboard" })
-      }
-      else{
+        Swal.close();
+        this.$router.push({ name: "Dashboard" });
+      } else {
         Swal.fire({
           // width: '80%',
-          icon: 'error',
-          title: 'Error',
+          icon: "error",
+          title: "Error",
           text: msg,
-        })
+        });
       }
     },
   },
