@@ -23,7 +23,6 @@
     <v-data-table
       :headers="headers"
       :items="messages"
-      hide-default-footer
       class="elevation-2"
       :loading="loading"
       loading-text="Loading messages..."
@@ -53,8 +52,6 @@
       </template>
     </v-data-table>
 
-    <paginate v-if="!loading" />
-
     <v-dialog
       v-model="viewDialog"
       transition="dialog-top-transition"
@@ -75,7 +72,6 @@ import Swal from "sweetalert2";
 
 import getDate from "@/helpers/getDate";
 
-import Paginate from "./Paginate.vue";
 import ViewMessage from "./ViewMessage.vue";
 import ContactRequestsForm from "./ContactsRequestForm.vue";
 import SocialIcon from "./SocialIcon.vue";
@@ -84,7 +80,6 @@ export default {
   name: "MessagesTable",
   components: {
     ContactRequestsForm,
-    Paginate,
     ViewMessage,
     SocialIcon,
   },
