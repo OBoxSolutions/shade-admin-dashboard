@@ -43,7 +43,10 @@ export default {
 
   data() {
     return {
-      items: [{ title: "Contact me", icon: "mdi-numeric" }],
+      items: [
+        { title: "Contact me", icon: "mdi-account-alert" },
+        { title: "Work requests", icon: "mdi-briefcase" },
+      ],
     };
   },
   computed: {
