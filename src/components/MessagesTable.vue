@@ -48,7 +48,9 @@
         <v-icon small class="mr-2" @click="showSelectedMessage(item)">
           mdi-eye
         </v-icon>
-        <v-icon small @click="deleteSelectedMessage(item)"> mdi-delete </v-icon>
+        <v-icon small @click="deleteSelectedMessage(item)" color="error">
+          mdi-delete
+        </v-icon>
       </template>
     </v-data-table>
 
