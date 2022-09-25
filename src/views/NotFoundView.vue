@@ -10,7 +10,11 @@
         <h2>Lo sentimos, no hemos podido encontrar la página que buscas</h2>
 
         <div class="text-center">
-          <v-btn :to="{ name: 'Home' }" color="#0f7fe1" class="white--text">
+          <v-btn
+            :to="{ name: 'Dashboard' }"
+            color="#0f7fe1"
+            class="white--text"
+          >
             Ir a Inicio
           </v-btn>
         </div>
