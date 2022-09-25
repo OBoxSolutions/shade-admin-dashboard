@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <base-section>
+    <section>
       <v-container
         class="d-flex flex-column justify-center items-center content-center align-center"
       >
@@ -15,7 +15,7 @@
           </v-btn>
         </div>
       </v-container>
-    </base-section>
+    </section>
   </v-app>
 </template>
 
