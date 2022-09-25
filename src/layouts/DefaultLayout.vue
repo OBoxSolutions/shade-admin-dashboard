@@ -1,8 +1,6 @@
 <template>
   <v-app>
     <v-app-bar color="primary" dark app>
-      <img src="@/assets/logo.svg" class="logo" />
-
       <v-row justify="end">
         <v-app-bar-nav-icon
           v-if="authenticated"
@@ -13,6 +11,24 @@
         </v-app-bar-nav-icon>
       </v-row>
     </v-app-bar>
+    <v-navigation-drawer app>
+      <div class="ma-4">
+        <img src="@/assets/logo.svg" class="logo" />
+      </div>
+      <v-divider></v-divider>
+      <v-list dense nav>
+        <v-list-item v-for="item in items" :key="item.title" link>
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-main>
       <router-view />
     </v-main>
@@ -24,9 +40,16 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "DefaultLayout",
+
+  data() {
+    return {
+      items: [{ title: "Contact me", icon: "mdi-numeric" }],
+    };
+  },
   computed: {
     ...mapGetters("auth", ["authenticated", "user"]),
   },
+
   methods: {
     ...mapActions("auth", ["logout"]),
     async logoutUser() {
@@ -41,7 +64,7 @@ export default {
 
 <style scoped>
 .logo {
-  height: 100%;
-  width: auto;
+  height: auto;
+  width: 100%;
 }
 </style>
