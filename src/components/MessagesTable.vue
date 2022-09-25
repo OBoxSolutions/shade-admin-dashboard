@@ -2,6 +2,7 @@
   <v-container fluid>
     <div class="d-flex justify-end">
       <v-text-field
+        v-model="search"
         prepend-inner-icon="mdi-magnify"
         class="search-bar mr-2"
       ></v-text-field>
@@ -24,6 +25,7 @@
       class="elevation-2"
       :loading="loading"
       loading-text="Loading messages..."
+      :search="search"
     >
       <template slot="no-data"> No messages found </template>
 
@@ -87,6 +89,8 @@ export default {
         value: "",
         pageNumber: this.getCurrentPage || 1,
       },
+
+      search: "",
 
       loading: true,
       headers: [
