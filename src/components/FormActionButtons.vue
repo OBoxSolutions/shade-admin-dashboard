@@ -24,11 +24,11 @@ export default {
     },
     cancelButtonText: {
       type: String,
-      default: "Cancelar",
+      default: "Cancel",
     },
     acceptButtonText: {
       type: String,
-      default: "Aceptar",
+      default: "Accept",
     },
   },
   methods: {
