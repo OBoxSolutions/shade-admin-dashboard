@@ -1,15 +1,5 @@
 <template>
   <v-container fluid>
-    <v-dialog
-      v-model="viewDialog"
-      transition="dialog-top-transition"
-      max-width="500px"
-    >
-      <view-message
-        :message="selectedMessage"
-        @close="closeViewMessage"
-      ></view-message>
-    </v-dialog>
     <div class="d-flex justify-end">
       <menu-filter class="mb-5">
         <v-select
@@ -73,6 +63,17 @@
     </v-data-table>
 
     <paginate v-if="!loading" />
+
+    <v-dialog
+      v-model="viewDialog"
+      transition="dialog-top-transition"
+      max-width="500px"
+    >
+      <view-message
+        :message="selectedMessage"
+        @close="closeViewMessage"
+      ></view-message>
+    </v-dialog>
   </v-container>
 </template>
 
