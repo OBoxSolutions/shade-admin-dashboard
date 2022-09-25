@@ -1,12 +1,10 @@
 <template>
   <v-container fluid>
     <div class="d-flex justify-end">
-      <menu-filter class="mb-5" @click:accept="filter">
-        <contact-requests-form
-          v-model="filterData"
-          @enter="filter"
-        ></contact-requests-form>
-      </menu-filter>
+      <v-text-field
+        prepend-inner-icon="mdi-magnify"
+        class="search-bar mr-2"
+      ></v-text-field>
       <v-btn
         @click="clearFilter"
         icon
@@ -73,13 +71,11 @@ import Swal from "sweetalert2";
 import getDate from "@/helpers/getDate";
 
 import ViewMessage from "./ViewMessage.vue";
-import ContactRequestsForm from "./ContactsRequestForm.vue";
 import SocialIcon from "./SocialIcon.vue";
 
 export default {
   name: "MessagesTable",
   components: {
-    ContactRequestsForm,
     ViewMessage,
     SocialIcon,
   },
@@ -178,3 +174,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.search-bar {
+  max-width: 400px;
+}
+</style>
