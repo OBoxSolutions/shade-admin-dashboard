@@ -25,7 +25,7 @@
       <v-card-actions v-if="allowActions">
         <slot name="actions" :actions="{ onClick, cancelClick }">
           <v-spacer />
-          <app-form-action-buttons
+          <form-action-buttons
             @accept-click="onClick"
             @cancel-click="cancelClick"
           />
@@ -36,8 +36,13 @@
 </template>
 
 <script>
+import FormActionButtons from "./FormActionButtons.vue";
+
 export default {
   name: "MenuFilter",
+  components: {
+    FormActionButtons,
+  },
   props: {
     value: {
       type: Boolean,
