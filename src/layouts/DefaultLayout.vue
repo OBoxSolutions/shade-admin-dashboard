@@ -57,7 +57,7 @@ export default {
         {
           title: "Work requests",
           icon: "mdi-briefcase",
-          viewName: "WorkRequests",
+          viewName: "WorkRequestsView",
         },
       ],
     };
