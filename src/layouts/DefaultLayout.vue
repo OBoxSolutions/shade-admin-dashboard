@@ -21,7 +21,7 @@
           v-for="item in items"
           :key="item.title"
           link
-          :to="item.viewName"
+          :to="{ name: item.viewName }"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
