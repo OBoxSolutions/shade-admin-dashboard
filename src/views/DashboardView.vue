@@ -6,7 +6,6 @@
 
 <script>
 import MessagesTable from "@/components/MessagesTable.vue";
-// @ is an alias to /src
 
 export default {
   name: "DashboardView",
