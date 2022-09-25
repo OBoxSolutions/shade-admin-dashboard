@@ -22,6 +22,20 @@ export default [
           next();
         },
       },
+
+      {
+        path: "/work-requests",
+        name: "WorkRequestsView",
+        component: () => import("@/views/WorkRequestsView.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters["auth/authenticated"]) {
+            return next({
+              name: "Login",
+            });
+          }
+          next();
+        },
+      },
     ],
   },
   {
