@@ -1,20 +1,11 @@
 <template>
   <v-container fluid>
     <div class="d-flex justify-end">
-      <menu-filter class="mb-5">
-        <v-select
-          v-model="filterData.category"
-          :items="categories"
-          label="Filter by"
-          clearable
-        ></v-select>
-        <v-text-field
-          v-model="filterData.value"
-          append-icon="mdi-magnify"
-          @keyup.enter="filter"
-          @click:append="filter"
-          label="Search"
-        ></v-text-field>
+      <menu-filter class="mb-5" @click:accept="filter">
+        <contact-requests-form
+          v-model="filterData"
+          @enter="filter"
+        ></contact-requests-form>
       </menu-filter>
       <v-btn
         @click="clearFilter"
@@ -79,18 +70,20 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Paginate from "./Paginate.vue";
+
 import Swal from "sweetalert2";
-import ViewMessage from "./ViewMessage.vue";
 
 import getDate from "@/helpers/getDate";
+
+import Paginate from "./Paginate.vue";
+import ViewMessage from "./ViewMessage.vue";
+import ContactRequestsForm from "./ContactsRequestForm.vue";
 import SocialIcon from "./SocialIcon.vue";
-import MenuFilter from "./MenuFilter.vue";
 
 export default {
   name: "MessagesTable",
   components: {
-    MenuFilter,
+    ContactRequestsForm,
     Paginate,
     ViewMessage,
     SocialIcon,
@@ -103,12 +96,7 @@ export default {
         value: "",
         pageNumber: this.getCurrentPage || 1,
       },
-      categories: [
-        { text: "Name", value: "name" },
-        { text: "Social", value: "social" },
-        { text: "Contact", value: "contact" },
-        { text: "Message Text", value: "text" },
-      ],
+
       loading: true,
       headers: [
         { text: "Name", align: "start", value: "name", sortable: false },
