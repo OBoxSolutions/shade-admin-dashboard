@@ -45,7 +45,12 @@
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="showSelectedMessage(item)">
+        <v-icon
+          small
+          class="mr-2"
+          @click="showSelectedMessage(item)"
+          color="primary"
+        >
           mdi-eye
         </v-icon>
         <v-icon small @click="deleteSelectedMessage(item)" color="error">
