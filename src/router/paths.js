@@ -24,9 +24,9 @@ export default [
       },
 
       {
-        path: "/work-requests",
-        name: "WorkRequestsView",
-        component: () => import("@/views/WorkRequestsView.vue"),
+        path: "/hiring-requests",
+        name: "Hiring",
+        component: () => import("@/views/HiringRequestsView.vue"),
         beforeEnter: (to, from, next) => {
           if (!store.getters["auth/authenticated"]) {
             return next({
