@@ -1,23 +1,9 @@
 <template>
   <v-container fluid>
-    <div class="d-flex justify-end">
-      <v-text-field
-        v-model="search"
-        prepend-inner-icon="mdi-magnify"
-        class="search-bar mr-2"
-      ></v-text-field>
-      <v-btn
-        @click="clearFilter"
-        icon
-        class="ma-2"
-        outlined
-        fab
-        small
-        color="primary"
-      >
-        <v-icon>mdi-cached</v-icon>
-      </v-btn>
-    </div>
+    <data-table-toolbar
+      :search.sync="search"
+      @click:reload="clearFilter"
+    ></data-table-toolbar>
 
     <v-data-table
       :headers="headers"
@@ -81,12 +67,14 @@ import getDate from "@/helpers/getDate";
 
 import ViewMessage from "./ViewMessage.vue";
 import SocialIcon from "./SocialIcon.vue";
+import DataTableToolbar from "./DataTableToolbar.vue";
 
 export default {
   name: "MessagesTable",
   components: {
     ViewMessage,
     SocialIcon,
+    DataTableToolbar,
   },
   data() {
     return {
