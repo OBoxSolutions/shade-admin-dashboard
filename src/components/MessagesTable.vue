@@ -173,9 +173,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.search-bar {
-  max-width: 400px;
-}
-</style>
