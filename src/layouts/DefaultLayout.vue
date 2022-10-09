@@ -1,8 +1,13 @@
 <template>
   <v-app>
     <v-app-bar color="primary" dark app>
-      <v-row justify="end">
+      <v-row>
+        <v-app-bar-nav-icon @click="toggleDrawer">
+          <v-icon>mdi-menu</v-icon>
+        </v-app-bar-nav-icon>
+
         <v-app-bar-nav-icon
+          class="ml-auto"
           v-if="authenticated"
           title="Logout"
           @click="logoutUser"
@@ -11,7 +16,7 @@
         </v-app-bar-nav-icon>
       </v-row>
     </v-app-bar>
-    <v-navigation-drawer app>
+    <v-navigation-drawer app v-model="drawer">
       <div class="ma-4">
         <img src="@/assets/logo.svg" class="logo" />
       </div>
@@ -48,6 +53,7 @@ export default {
 
   data() {
     return {
+      drawer: true,
       items: [
         {
           title: "Contact me",
@@ -83,6 +89,9 @@ export default {
       if (resp) {
         this.$router.replace({ name: "Login" });
       }
+    },
+    toggleDrawer() {
+      this.drawer = !this.drawer;
     },
   },
 };
