@@ -23,7 +23,4 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.table {
-  width: 90%;
-}
 </style>
