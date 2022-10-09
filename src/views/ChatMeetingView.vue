@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <v-container class="home">
     <data-table-toolbar
       :search.sync="search"
       @click:reload="loadData"
@@ -28,7 +28,7 @@
         </v-icon>
       </template>
     </v-data-table>
-  </div>
+  </v-container>
 </template>
 
 <script>
