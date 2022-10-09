@@ -8,7 +8,7 @@
 import MessagesTable from "@/components/MessagesTable.vue";
 
 export default {
-  name: "DashboardView",
+  name: "HiringRequestsView",
   components: {
     MessagesTable,
   },
