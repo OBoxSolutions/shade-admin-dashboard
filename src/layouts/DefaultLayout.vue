@@ -57,17 +57,17 @@ export default {
         {
           title: "Hiring requests",
           icon: "mdi-briefcase",
-          viewName: "WorkRequestsView",
+          viewName: "Hiring",
         },
         {
           title: "Chat meeting",
           icon: "mdi-chat",
-          viewName: "WorkRequestsView",
+          viewName: "ChatMeeting",
         },
         {
-          title: "Hiring requests",
+          title: "Video Meeting",
           icon: "mdi-video",
-          viewName: "WorkRequestsView",
+          viewName: "VideoMeeting",
         },
       ],
     };

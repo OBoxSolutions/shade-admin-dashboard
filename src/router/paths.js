@@ -36,6 +36,34 @@ export default [
           next();
         },
       },
+
+      {
+        path: "/chat-meeting",
+        name: "ChatMeeting",
+        component: () => import("@/views/ChatMeetingView.vue"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters["auth/authenticated"]) {
+            return next({
+              name: "Login",
+            });
+          }
+          next();
+        },
+      },
+
+      {
+        path: "/video-meeting",
+        name: "VideoMeeting",
+        component: () => import("@/views/VideoMeetingView"),
+        beforeEnter: (to, from, next) => {
+          if (!store.getters["auth/authenticated"]) {
+            return next({
+              name: "Login",
+            });
+          }
+          next();
+        },
+      },
     ],
   },
   {
