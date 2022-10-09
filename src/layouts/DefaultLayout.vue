@@ -55,8 +55,18 @@ export default {
           viewName: "Dashboard",
         },
         {
-          title: "Work requests",
+          title: "Hiring requests",
           icon: "mdi-briefcase",
+          viewName: "WorkRequestsView",
+        },
+        {
+          title: "Chat meeting",
+          icon: "mdi-chat",
+          viewName: "WorkRequestsView",
+        },
+        {
+          title: "Hiring requests",
+          icon: "mdi-video",
           viewName: "WorkRequestsView",
         },
       ],
