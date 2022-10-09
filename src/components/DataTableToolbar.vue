@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-end">
+  <div class="d-flex justify-end w-full">
     <v-text-field
       v-model="searchComputed"
       prepend-inner-icon="mdi-magnify"
@@ -49,5 +49,9 @@ export default {
 <style scoped>
 .search-bar {
   max-width: 400px;
+}
+
+.w-full {
+  width: 100%;
 }
 </style>
