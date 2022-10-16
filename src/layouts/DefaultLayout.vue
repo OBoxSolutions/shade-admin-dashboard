@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar color="secondary" dark app>
+    <v-app-bar color="white" dark app>
       <v-row>
         <v-app-bar-nav-icon @click="toggleDrawer">
-          <v-icon>mdi-menu</v-icon>
+          <v-icon color="grey-4">mdi-menu</v-icon>
         </v-app-bar-nav-icon>
 
         <v-app-bar-nav-icon
@@ -12,7 +12,7 @@
           title="Logout"
           @click="logoutUser"
         >
-          <v-icon>mdi-logout</v-icon>
+          <v-icon color="grey-4">mdi-logout</v-icon>
         </v-app-bar-nav-icon>
       </v-row>
     </v-app-bar>
