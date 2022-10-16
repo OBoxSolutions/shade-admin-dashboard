@@ -14,5 +14,7 @@ export default {
 .base-button {
   font-family: "Press Start 2P", "Franklin Gothic Medium", "Arial Narrow", Arial,
     sans-serif;
+  text-transform: capitalize;
+  color: white;
 }
 </style>
