@@ -2,7 +2,7 @@
   <router-view></router-view>
 </template>
 
-<style scoped>
+<style>
 :root {
   --primary-color: "#11ABAB";
   --secondary-color: "#FEAC07";
