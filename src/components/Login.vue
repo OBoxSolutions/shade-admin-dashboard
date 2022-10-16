@@ -80,6 +80,6 @@ export default {
 
 <style scoped>
 .container {
-  background-color: var(--primary-color);
+  background-color: var(--bg-color);
 }
 </style>
