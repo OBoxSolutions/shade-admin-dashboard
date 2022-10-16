@@ -1,10 +1,10 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height class="container">
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <img src="@/assets/logo.svg" class="mb-6 mx-6" alt="" />
         <v-card class="elevation-12">
-          <v-toolbar dark color="primary">
+          <v-toolbar dark color="secondary">
             <v-toolbar-title>Login</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
@@ -26,7 +26,7 @@
                 placeholder="Enter your password here"
                 required
               ></v-text-field>
-              <v-btn type="submit" class="mt-4" color="primary" value="login"
+              <v-btn type="submit" class="mt-4" color="action" value="login"
                 >Login</v-btn
               >
             </form>
@@ -77,3 +77,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container {
+  background-color: var(--primary-color);
+}
+</style>
