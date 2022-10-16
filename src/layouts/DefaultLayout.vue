@@ -16,7 +16,7 @@
         </v-app-bar-nav-icon>
       </v-row>
     </v-app-bar>
-    <v-navigation-drawer app v-model="drawer">
+    <v-navigation-drawer app v-model="drawer" color="bg-color">
       <div class="ma-4">
         <img src="@/assets/logo.svg" class="logo" />
       </div>
