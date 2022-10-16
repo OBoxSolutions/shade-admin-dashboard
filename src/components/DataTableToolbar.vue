@@ -5,7 +5,7 @@
       prepend-inner-icon="mdi-magnify"
       class="search-bar mr-2"
     ></v-text-field>
-    <v-btn
+    <base-button
       @click="onReload"
       icon
       class="ma-2"
@@ -15,13 +15,18 @@
       color="primary"
     >
       <v-icon>mdi-cached</v-icon>
-    </v-btn>
+    </base-button>
   </div>
 </template>
 
 <script>
+import BaseButton from "./BaseButton.vue";
+
 export default {
   name: "DataTableToolbar",
+  components: {
+    BaseButton,
+  },
   props: {
     search: {
       type: String,
