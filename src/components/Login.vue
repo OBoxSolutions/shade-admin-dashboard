@@ -26,9 +26,14 @@
                 placeholder="Enter your password here"
                 required
               ></v-text-field>
-              <v-btn type="submit" class="mt-4" color="action" value="login"
-                >Login</v-btn
+              <base-button
+                type="submit"
+                class="mt-4"
+                color="action"
+                value="login"
               >
+                Login
+              </base-button>
             </form>
           </v-card-text>
         </v-card>
@@ -41,8 +46,13 @@
 import { mapActions } from "vuex";
 import Swal from "sweetalert2";
 
+import BaseButton from "@/components/BaseButton.vue";
+
 export default {
   name: "Login",
+  components: {
+    BaseButton,
+  },
   data() {
     return {
       loginForm: {
