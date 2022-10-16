@@ -14,6 +14,7 @@ export default new Vuetify({
         accent: "#0065B8",
         contrast: "#ffffff",
         "bg-color": "#11abab",
+        "grey-4": "#212121",
       },
     },
   },
