@@ -14,6 +14,12 @@
       no-data-text="No chat meetings found"
       :search="search"
     >
+      <template v-slot:[`item.logo-file`]="{ item }">
+        <img :src="item['logo-file']" />
+      </template>
+      <template v-slot:[`item.app`]="{ item }">
+        <social-icon :social="item.app"></social-icon>
+      </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon
           small
@@ -34,12 +40,15 @@
 <script>
 import { getChatMeetings } from "@/api/chat-meeting";
 
+import SocialIcon from "@/components/SocialIcon.vue";
+
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
 
 export default {
   name: "ChatMeetingView",
   components: {
     DataTableToolbar,
+    SocialIcon,
   },
   data() {
     return {
@@ -47,14 +56,14 @@ export default {
       search: "",
       loading: false,
       headers: [
-        { text: "Name", value: "name" },
+        { text: "Name", value: "name", width: 160 },
         { text: "Email", value: "email" },
-        { text: "Country", value: "country" },
-        { text: "Birthdate", value: "birthdate" },
+        { text: "Country", value: "country", width: 160 },
+        { text: "Birthdate", value: "birthdate", width: 200 },
         { text: "App", value: "app" },
-        { text: "About", value: "about" },
-        { text: "Goals", value: "goals" },
-        { text: "Budget", value: "budget" },
+        { text: "About", value: "about", width: 400 },
+        { text: "Goals", value: "goals", width: 400 },
+        { text: "Budget", value: "budget", width: 300 },
         { text: "Logo Info", value: "logo-info" },
         { text: "Logo File", value: "logo-file" },
         { text: "More Info", value: "more-info" },
