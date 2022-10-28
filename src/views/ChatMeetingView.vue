@@ -21,6 +21,7 @@
         <social-icon :social="item.app"></social-icon>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small class="mr-2"> mdi-image </v-icon>
         <v-icon
           small
           class="mr-2"
@@ -65,9 +66,7 @@ export default {
         { text: "Goals", value: "goals", width: 400 },
         { text: "Budget", value: "budget", width: 300 },
         { text: "Logo Info", value: "logo-info" },
-        { text: "Logo File", value: "logo-file" },
         { text: "More Info", value: "more-info" },
-        { text: "More Info Files", value: "more-info-files" },
         { text: "Actions", value: "actions" },
       ],
     };
