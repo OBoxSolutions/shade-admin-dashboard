@@ -14,6 +14,9 @@
       no-data-text="No video meetings found"
       :search="search"
     >
+      <template v-slot:[`item.app`]="{ item }">
+        <social-icon :social="item.app"></social-icon>
+      </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon
           small
@@ -34,12 +37,14 @@
 <script>
 import { getVideoMeetings } from "@/api/video-meeting";
 
+import SocialIcon from "@/components/SocialIcon.vue";
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
 
 export default {
   name: "VideoMeetingView",
   components: {
     DataTableToolbar,
+    SocialIcon,
   },
   data() {
     return {
