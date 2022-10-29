@@ -43,8 +43,8 @@
     </v-data-table>
 
     <v-dialog v-model="isDialogImageOpen">
-      <v-card>
-        <v-card-text class="mt-2">
+      <v-card class="pt-4">
+        <v-card-text>
           <h3>Logo</h3>
           <v-img :src="selectedChatMeeting.logo_file"></v-img>
         </v-card-text>
