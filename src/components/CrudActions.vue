@@ -12,7 +12,7 @@
               :small="small"
               :large="large"
               :x-small="xSmall"
-              :style="{ 'margin-right': `${buttonSeparation}em` }"
+              :class="`mr-${buttonSeparation}`"
               icon
               v-on="on"
               @click.stop="detailsClick"
@@ -31,7 +31,7 @@
               :small="small"
               :large="large"
               :x-small="xSmall"
-              :style="{ 'margin-right': `${buttonSeparation}em` }"
+              :class="`mr-${buttonSeparation}`"
               icon
               v-on="on"
               @click.stop="editClick"
@@ -50,7 +50,7 @@
               :small="small"
               :large="large"
               :x-small="xSmall"
-              :style="{ 'margin-right': `${buttonSeparation}em` }"
+              :class="`mr-${buttonSeparation}`"
               icon
               v-on="on"
               @click.stop="deleteClick"
