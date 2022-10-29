@@ -103,7 +103,7 @@ export default {
     // Añade separación entre los botones
     buttonSeparation: {
       type: [String, Number],
-      default: 1,
+      default: 3,
     },
     // Separa todos los botones hacia la derecha
     separation: {
