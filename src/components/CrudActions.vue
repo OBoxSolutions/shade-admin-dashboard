@@ -1,9 +1,9 @@
 <template>
   <div :style="{ 'margin-left': `${separation}em` }" class="action-buttons">
     <div class="buttons-wrapper">
-      <slot name="prepend" />
-
       <div class="text-center d-flex align-center justify-space-around">
+        <slot name="prepend" />
+
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
