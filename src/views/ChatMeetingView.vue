@@ -28,13 +28,7 @@
           @delete:click="deleteSelectedMessage(item)"
         >
           <template #prepend>
-            <v-btn
-              v-if="!disableDetails"
-              x-small
-              icon
-              @click="openImagesDialog"
-              class="mr-3"
-            >
+            <v-btn x-small icon @click="openImagesDialog" class="mr-3">
               <v-icon color="primary"> mdi-image </v-icon>
             </v-btn>
           </template>
