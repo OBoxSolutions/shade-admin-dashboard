@@ -31,17 +31,12 @@
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="showSelectedMessage(item)"
-          color="primary"
-        >
-          mdi-eye
-        </v-icon>
-        <v-icon small @click="deleteSelectedMessage(item)" color="error">
-          mdi-delete
-        </v-icon>
+        <crud-actions
+          x-small
+          disable-edit
+          @click:details="showSelectedMessage(item)"
+          @click:delete="deleteSelectedMessage(item)"
+        ></crud-actions>
       </template>
     </v-data-table>
 
@@ -68,6 +63,7 @@ import getDate from "@/helpers/getDate";
 import ViewMessage from "./ViewMessage.vue";
 import SocialIcon from "./SocialIcon.vue";
 import DataTableToolbar from "./DataTableToolbar.vue";
+import CrudActions from "@/components/CrudActions.vue";
 
 export default {
   name: "MessagesTable",
@@ -75,6 +71,7 @@ export default {
     ViewMessage,
     SocialIcon,
     DataTableToolbar,
+    CrudActions,
   },
   data() {
     return {
