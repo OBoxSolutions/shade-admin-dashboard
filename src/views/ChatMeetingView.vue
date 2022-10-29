@@ -26,9 +26,33 @@
           disable-edit
           @details:click="showSelectedMessage(item)"
           @delete:click="deleteSelectedMessage(item)"
-        ></crud-actions>
+        >
+          <template #prepend>
+            <v-btn v-if="!disableDetails" small icon @click="openImagesDialog">
+              <v-icon color="primary"> mdi-image </v-icon>
+            </v-btn>
+          </template>
+        </crud-actions>
       </template>
     </v-data-table>
+
+    <v-dialog v-model="isDialogImageOpen">
+      <v-card>
+        <v-card-text class="mt-2">
+          <h3>Logo</h3>
+          <v-img :src="selectedChatMeeting.logo_file"></v-img>
+        </v-card-text>
+
+        <v-card-text>
+          <h3>More info images</h3>
+          <v-img
+            v-for="image in selectedChatMeeting.more_info_file"
+            :key="image"
+            :src="image"
+          ></v-img>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -50,7 +74,12 @@ export default {
     return {
       meetings: [],
       search: "",
+
       loading: false,
+      isDialogImageOpen: false,
+
+      selectedChatMeeting: {},
+
       headers: [
         { text: "Name", value: "name", width: 160 },
         { text: "Email", value: "email" },
@@ -79,6 +108,10 @@ export default {
         console.log(error);
       }
       this.loading = false;
+    },
+    openImagesDialog(item) {
+      this.selectedChatMeeting = item;
+      this.isDialogImageOpen = true;
     },
   },
 };
