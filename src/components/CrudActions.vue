@@ -144,9 +144,6 @@ export default {
     addClick() {
       this.$emit("add-click");
     },
-    adminClick() {
-      this.$emit("admin-click");
-    },
   },
 };
 </script>
