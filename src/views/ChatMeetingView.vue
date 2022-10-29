@@ -21,18 +21,12 @@
         <social-icon :social="item.app"></social-icon>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2"> mdi-image </v-icon>
-        <v-icon
-          small
-          class="mr-2"
-          @click="showSelectedMessage(item)"
-          color="primary"
-        >
-          mdi-eye
-        </v-icon>
-        <v-icon small @click="deleteSelectedMessage(item)" color="error">
-          mdi-delete
-        </v-icon>
+        <crud-actions
+          x-small
+          disable-edit
+          @details:click="showSelectedMessage(item)"
+          @delete:click="deleteSelectedMessage(item)"
+        ></crud-actions>
       </template>
     </v-data-table>
   </v-container>
@@ -42,14 +36,15 @@
 import { getChatMeetings } from "@/api/chat-meeting";
 
 import SocialIcon from "@/components/SocialIcon.vue";
-
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
+import CrudActions from "@/components/CrudActions.vue";
 
 export default {
   name: "ChatMeetingView",
   components: {
     DataTableToolbar,
     SocialIcon,
+    CrudActions,
   },
   data() {
     return {
