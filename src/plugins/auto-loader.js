@@ -1,13 +1,15 @@
 import Vue from "vue";
 
-const baseComponents = require.context("@/components", true, /\.vue$/);
+const baseComponents = import.meta.glob("@/components/*.vue");
 
-for (const file of baseComponents.keys()) {
-  const componentConfig = baseComponents(file);
-  const name = file
-    .replace(/index.js/, "")
-    .replace(/^\.\//, "")
-    .replace(/\.\w+$/, "");
+for (const key in baseComponents) {
+  if (Object.hasOwnProperty.call(baseComponents, key)) {
+    const name = key
+      .replace(/index.js/, "")
+      .replace(/^\.\//, "")
+      .replace(/\.\w+$/, "")
+      .replace("../components/", "");
 
-  Vue.component(`${name}`, componentConfig.default || componentConfig);
+    Vue.component(`${name}`, baseComponents[key]);
+  }
 }
