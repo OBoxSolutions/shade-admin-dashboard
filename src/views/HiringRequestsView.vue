@@ -61,7 +61,6 @@ export default {
         { text: "Country", value: "country" },
         { text: "Applying for", value: "applying_for" },
         { text: "Birthdate", value: "birthdate" },
-        { text: "Answers", value: "answers" },
         { text: "Files link", value: "files_link" },
         { text: "Actions", value: "actions" },
       ],
