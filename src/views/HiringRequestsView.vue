@@ -14,12 +14,6 @@
       no-data-text="No chat meetings found"
       :search="search"
     >
-      <template v-slot:[`item.logo-file`]="{ item }">
-        <img :src="item['logo-file']" />
-      </template>
-      <template v-slot:[`item.app`]="{ item }">
-        <social-icon :social="item.app"></social-icon>
-      </template>
       <template v-slot:[`item.actions`]="{ item }">
         <crud-actions
           x-small
