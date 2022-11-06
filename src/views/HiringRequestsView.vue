@@ -18,7 +18,7 @@
         <crud-actions
           x-small
           disable-edit
-          @click:details="showSelectedMessage(item)"
+          @click:details="openDetails(item)"
           @click:delete="deleteHiringRequest(item)"
         >
         </crud-actions>
@@ -45,6 +45,8 @@ export default {
     return {
       hiringRequests: [],
       search: "",
+
+      selectedHiringRequest: null,
 
       loading: false,
       isDialogImageOpen: false,
@@ -73,6 +75,10 @@ export default {
         console.log(error);
       }
       this.loading = false;
+    },
+
+    openDetails(item) {
+      this.selectedHiringRequest = { ...item };
     },
     async deleteHiringRequest(item) {
       await deleteHiringRequest(item.id);
