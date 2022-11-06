@@ -63,6 +63,7 @@ export default {
         { text: "Birthdate", value: "birthdate" },
         { text: "Answers", value: "answers" },
         { text: "Files link", value: "files_link" },
+        { text: "Actions", value: "actions" },
       ],
     };
   },
