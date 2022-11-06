@@ -24,6 +24,11 @@
         </crud-actions>
       </template>
     </v-data-table>
+    <v-dialog>
+      <v-card>
+        <v-card-title> Questions </v-card-title>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -33,6 +38,8 @@ import { getHiringRequests, deleteHiringRequest } from "@/api/hiring-requests";
 import SocialIcon from "@/components/SocialIcon.vue";
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
 import CrudActions from "@/components/CrudActions.vue";
+
+import { questionsMap } from "@/utils/mapper.js";
 
 export default {
   name: "HiringRequestsView",
@@ -61,6 +68,27 @@ export default {
         { text: "Actions", value: "actions" },
       ],
     };
+  },
+
+  computed: {
+    questions() {
+      if (!this.selectedHiringRequest) return;
+
+      const keys = Object.keys(this.selectedHiringRequest);
+
+      const questionsKeys = keys.filter((key) => {
+        return key.includes("question");
+      });
+
+      const questions = questionsKeys.map((questionKey) => {
+        return {
+          question: questionsMap[questionKey],
+          answer: this.selectedHiringRequest[questionKey],
+        };
+      });
+
+      return questions;
+    },
   },
 
   created() {
