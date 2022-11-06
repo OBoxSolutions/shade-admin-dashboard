@@ -133,16 +133,16 @@ export default {
   },
   methods: {
     detailsClick() {
-      this.$emit("details-click");
+      this.$emit("click:details");
     },
     editClick() {
-      this.$emit("edit-click");
+      this.$emit("click:edit");
     },
     deleteClick() {
-      this.$emit("delete-click");
+      this.$emit("click:delete");
     },
     addClick() {
-      this.$emit("add-click");
+      this.$emit("click:add");
     },
   },
 };
