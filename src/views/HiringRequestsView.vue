@@ -24,7 +24,7 @@
         </crud-actions>
       </template>
     </v-data-table>
-    <v-dialog>
+    <v-dialog v-model="isDialogOpen">
       <v-card>
         <v-card-title> Questions </v-card-title>
       </v-card>
@@ -56,7 +56,7 @@ export default {
       selectedHiringRequest: null,
 
       loading: false,
-      isDialogImageOpen: false,
+      isDialogOpen: false,
 
       headers: [
         { text: "Name", value: "name" },
@@ -107,6 +107,7 @@ export default {
 
     openDetails(item) {
       this.selectedHiringRequest = { ...item };
+      this.isDialogOpen = true;
     },
     async deleteHiringRequest(item) {
       await deleteHiringRequest(item.id);
