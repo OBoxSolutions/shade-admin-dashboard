@@ -18,8 +18,8 @@
         <crud-actions
           x-small
           disable-edit
-          @details:click="showSelectedMessage(item)"
-          @delete:click="deleteSelectedMessage(item)"
+          @click:details="showSelectedMessage(item)"
+          @click:delete="deleteHiringRequest(item)"
         >
         </crud-actions>
       </template>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { getHiringRequests } from "@/api/hiring-requests";
+import { getHiringRequests, deleteHiringRequest } from "@/api/hiring-requests";
 
 import SocialIcon from "@/components/SocialIcon.vue";
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
@@ -73,6 +73,10 @@ export default {
         console.log(error);
       }
       this.loading = false;
+    },
+    async deleteHiringRequest(item) {
+      await deleteHiringRequest(item.id);
+      this.loadData();
     },
   },
 };
