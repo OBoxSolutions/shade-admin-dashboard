@@ -7,7 +7,7 @@
 
     <v-data-table
       :headers="headers"
-      :items="meetings"
+      :items="hiringRequests"
       class="elevation-2"
       :loading="loading"
       loading-text="Loading chat meetings..."
@@ -30,24 +30,6 @@
         </crud-actions>
       </template>
     </v-data-table>
-
-    <v-dialog v-model="isDialogImageOpen">
-      <v-card class="pt-4">
-        <v-card-text>
-          <h3>Logo</h3>
-          <v-img :src="selectedChatMeeting.logo_file"></v-img>
-        </v-card-text>
-
-        <v-card-text>
-          <h3>More info images</h3>
-          <v-img
-            v-for="image in selectedChatMeeting.more_info_file"
-            :key="image"
-            :src="image"
-          ></v-img>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
   </v-container>
 </template>
 
