@@ -27,6 +27,22 @@
     <v-dialog v-model="isDialogOpen">
       <v-card>
         <v-card-title> Questions </v-card-title>
+        <v-card-text>
+          <v-list>
+            <v-list-item
+              two-line
+              v-for="(question, index) in questions"
+              :key="`question-${index}`"
+            >
+              <v-list-item-content>
+                <v-list-item-title>{{ question.question }}</v-list-item-title>
+                <v-list-item-subtitle>{{
+                  question.answer
+                }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </v-container>
