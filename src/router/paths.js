@@ -54,7 +54,7 @@ export default [
       {
         path: "/video-meeting",
         name: "VideoMeeting",
-        component: () => import("@/views/VideoMeetingView"),
+        component: () => import("@/views/VideoMeetingView.vue"),
         beforeEnter: (to, from, next) => {
           if (!store.getters["auth/authenticated"]) {
             return next({
