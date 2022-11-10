@@ -86,8 +86,8 @@ export default {
         { text: "About", value: "about", width: 400 },
         { text: "Goals", value: "goals", width: 400 },
         { text: "Budget", value: "budget", width: 300 },
-        { text: "Logo Info", value: "logo-info" },
-        { text: "More Info", value: "more-info" },
+        { text: "Logo Info", value: "logo_info", width: 400 },
+        { text: "More Info", value: "more_info", width: 400 },
         { text: "Actions", value: "actions" },
       ],
     };
