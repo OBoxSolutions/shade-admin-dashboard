@@ -25,7 +25,7 @@
           x-small
           disable-edit
           @details:click="showSelectedMessage(item)"
-          @delete:click="deleteSelectedMessage(item)"
+          @delete:click="deleteHiringRequest(item)"
         >
           <template #prepend>
             <v-btn x-small icon @click="openImagesDialog" class="mr-3">
@@ -62,6 +62,7 @@ import { getChatMeetings } from "@/api/chat-meeting";
 import SocialIcon from "@/components/SocialIcon.vue";
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
 import CrudActions from "@/components/CrudActions.vue";
+import Swal from "sweetalert2";
 
 export default {
   name: "ChatMeetingView",
@@ -105,7 +106,7 @@ export default {
       try {
         this.meetings = (await (await getChatMeetings()).data?.data) ?? [];
       } catch (error) {
-        console.log(error);
+        Swal.fire(error.message, "", "error");
       }
       this.loading = false;
     },
