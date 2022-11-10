@@ -28,7 +28,7 @@
           @delete:click="deleteHiringRequest(item)"
         >
           <template #prepend>
-            <v-btn x-small icon @click="openImagesDialog" class="mr-3">
+            <v-btn x-small icon @click="openImagesDialog(item)" class="mr-3">
               <v-icon color="primary"> mdi-image </v-icon>
             </v-btn>
           </template>
@@ -45,11 +45,7 @@
 
         <v-card-text>
           <h3>More info images</h3>
-          <v-img
-            v-for="image in selectedChatMeeting.more_info_file"
-            :key="image"
-            :src="image"
-          ></v-img>
+          <v-img :src="selectedChatMeeting.more_info_file"></v-img>
         </v-card-text>
       </v-card>
     </v-dialog>
