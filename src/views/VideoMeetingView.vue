@@ -57,9 +57,9 @@ export default {
         { text: "Country", value: "country" },
         { text: "Birthdate", value: "birthdate" },
         { text: "App", value: "app" },
-        { text: "Meeting Date", value: "meeting-date" },
-        { text: "Time Before Meeting", value: "time-before-meeting" },
-        { text: "Meeting Link", value: "meeting-link" },
+        { text: "Meeting Date", value: "meeting_date" },
+        { text: "Time Before Meeting", value: "time_before_meeting" },
+        { text: "Meeting Link", value: "meeting_link" },
         { text: "Actions", value: "actions" },
       ],
     };
