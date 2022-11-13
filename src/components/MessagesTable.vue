@@ -82,7 +82,6 @@ export default {
       filterData: {
         category: "",
         value: "",
-        pageNumber: this.getCurrentPage || 1,
       },
 
       search: "",
@@ -131,7 +130,7 @@ export default {
     },
     async clearFilter() {
       this.loading = true;
-      await this.loadAllMessages(1);
+      await this.loadAllMessages();
       this.filterData.category = "";
       this.filterData.value = "";
       this.loading = false;
@@ -154,13 +153,12 @@ export default {
           this.deleteItem(item);
 
           if (!this.isFiltered) {
-            this.loadAllMessages(this.getCurrentPage);
+            this.loadAllMessages();
           } else {
             this.filterMessages(this.getFilterData);
           }
         }
       } catch (error) {
-        console.warn(error.message);
         Swal.fire(error?.message ?? "Error deleting item: ", "", "error");
       }
       Swal.hideLoading();
