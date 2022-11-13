@@ -18,7 +18,7 @@
         <crud-actions
           x-small
           disable-edit
-          @click:details="openDetails(item)"
+          disable-details
           @click:delete="deleteHiringRequest(item)"
         >
         </crud-actions>

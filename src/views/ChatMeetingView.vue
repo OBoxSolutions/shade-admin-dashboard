@@ -24,7 +24,7 @@
         <crud-actions
           x-small
           disable-edit
-          @details:click="showSelectedMessage(item)"
+          disable-details
           @delete:click="deleteHiringRequest(item)"
         >
           <template #prepend>

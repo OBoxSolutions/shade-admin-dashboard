@@ -34,6 +34,7 @@
         <crud-actions
           x-small
           disable-edit
+          disable-details
           @click:details="showSelectedMessage(item)"
           @click:delete="deleteSelectedMessage(item)"
         ></crud-actions>
