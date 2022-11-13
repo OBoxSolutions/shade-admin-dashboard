@@ -63,6 +63,9 @@ import getDate from "@/helpers/getDate";
 import ViewMessage from "./ViewMessage.vue";
 import SocialIcon from "./SocialIcon.vue";
 import DataTableToolbar from "./DataTableToolbar.vue";
+
+import { errorMessage } from "@/utils/commonSwalMessages";
+
 import CrudActions from "@/components/CrudActions.vue";
 
 export default {
@@ -139,12 +142,7 @@ export default {
     },
     async openConfirmationAlert(item) {
       try {
-        const { isConfirmed } = await Swal.fire({
-          title: "Are you sure?",
-          text: "Once deleted, it cannot be restored",
-          showDenyButton: true,
-          confirmButtonText: "Yes, I am sure",
-        });
+        const { isConfirmed } = await Swal.fire(errorMessage);
         if (isConfirmed) {
           new Swal({
             title: "Wait please",
