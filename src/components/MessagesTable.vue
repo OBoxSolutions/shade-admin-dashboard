@@ -104,7 +104,6 @@ export default {
     ...mapGetters("messages", [
       "getAllMessages",
       "getCurrentPage",
-      "isFiltered",
       "getFilterData",
     ]),
     messages: {
@@ -150,13 +149,8 @@ export default {
 
           Swal.showLoading();
 
-          this.deleteItem(item);
-
-          if (!this.isFiltered) {
-            this.loadAllMessages();
-          } else {
-            this.filterMessages(this.getFilterData);
-          }
+          await this.deleteItem(item);
+          this.loadAllMessages();
         }
       } catch (error) {
         Swal.fire(error?.message ?? "Error deleting item: ", "", "error");
