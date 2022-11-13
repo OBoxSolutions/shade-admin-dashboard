@@ -35,8 +35,7 @@
           x-small
           disable-edit
           disable-details
-          @click:details="showSelectedMessage(item)"
-          @click:delete="deleteSelectedMessage(item)"
+          @click:delete="openConfirmationAlert(item)"
         ></crud-actions>
       </template>
     </v-data-table>
@@ -138,31 +137,43 @@ export default {
       this.selectedMessage = item;
       this.viewDialog = true;
     },
-    async deleteSelectedMessage(item) {
-      const { isConfirmed } = await Swal.fire({
-        title: "Are you sure?",
-        text: "Once deleted, it cannot be restored",
-        showDenyButton: true,
-        confirmButtonText: "Yes, I am sure",
-      });
-      if (isConfirmed) {
-        new Swal({
-          title: "Wait please",
-          allowOutsideClick: false,
+    async openConfirmationAlert(item) {
+      try {
+        const { isConfirmed } = await Swal.fire({
+          title: "Are you sure?",
+          text: "Once deleted, it cannot be restored",
+          showDenyButton: true,
+          confirmButtonText: "Yes, I am sure",
         });
-        Swal.showLoading();
-        const { success, msg } = await this.deleteMessage(item.id);
-        if (!this.isFiltered) {
-          this.loadAllMessages(this.getCurrentPage);
-        } else {
-          this.filterMessages(this.getFilterData);
+        if (isConfirmed) {
+          new Swal({
+            title: "Wait please",
+            allowOutsideClick: false,
+          });
+
+          Swal.showLoading();
+
+          this.deleteItem(item);
+
+          if (!this.isFiltered) {
+            this.loadAllMessages(this.getCurrentPage);
+          } else {
+            this.filterMessages(this.getFilterData);
+          }
         }
-        if (success === 1) {
-          Swal.fire(msg, "", "success");
-        } else {
-          Swal.fire(msg, "", "error");
-        }
+      } catch (error) {
+        console.warn(error.message);
+        Swal.fire(error?.message ?? "Error deleting item: ", "", "error");
       }
+      Swal.hideLoading();
+    },
+
+    async deleteItem(item) {
+      const { success, msg } = await this.deleteMessage(item.id);
+
+      success
+        ? Swal.fire(msg ?? "Success", "", "success")
+        : Swal.fire(msg ?? "Error", "", "error");
     },
   },
   async created() {
