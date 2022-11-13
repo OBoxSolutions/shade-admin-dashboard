@@ -19,7 +19,7 @@
           x-small
           disable-edit
           disable-details
-          @click:delete="deleteHiringRequest(item)"
+          @click:delete="openConfirmationAlert(item)"
         >
         </crud-actions>
       </template>
@@ -54,6 +54,10 @@ import { getHiringRequests, deleteHiringRequest } from "@/api/hiring-requests";
 import SocialIcon from "@/components/SocialIcon.vue";
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
 import CrudActions from "@/components/CrudActions.vue";
+
+import Swal from "sweetalert2";
+
+import { errorMessage } from "@/utils/commonSwalMessages";
 
 import { questionsMap } from "@/utils/mapper.js";
 
@@ -125,9 +129,33 @@ export default {
       this.selectedHiringRequest = { ...item };
       this.isDialogOpen = true;
     },
-    async deleteHiringRequest(item) {
-      await deleteHiringRequest(item.id);
-      this.loadData();
+
+    async openConfirmationAlert(item) {
+      try {
+        const { isConfirmed } = await Swal.fire(errorMessage);
+        if (isConfirmed) {
+          new Swal({
+            title: "Wait please",
+            allowOutsideClick: false,
+          });
+
+          Swal.showLoading();
+
+          await this.deleteItem(item);
+          this.loadData();
+        }
+      } catch (error) {
+        Swal.fire(error?.message ?? "Error deleting item: ", "", "error");
+      }
+      Swal.hideLoading();
+    },
+
+    async deleteItem(item) {
+      const { success, msg } = await deleteHiringRequest(item.id);
+
+      success
+        ? Swal.fire(msg ?? "Success", "", "success")
+        : Swal.fire(msg ?? "Error", "", "error");
     },
   },
 };

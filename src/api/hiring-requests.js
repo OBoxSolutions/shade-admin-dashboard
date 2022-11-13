@@ -6,6 +6,7 @@ export async function getHiringRequests() {
 }
 
 export async function deleteHiringRequest(id) {
-  const chatMeetings = await adminApi.delete(`hiring-requests/${id}`);
-  return chatMeetings;
+  const response = await adminApi.delete(`hiring-requests/${id}`);
+
+  return response.data;
 }
