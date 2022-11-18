@@ -18,31 +18,32 @@
         <social-icon :social="item.app"></social-icon>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon
-          small
-          class="mr-2"
-          @click="showSelectedMessage(item)"
-          color="primary"
-        >
-          mdi-eye
-        </v-icon>
-        <v-icon small @click="deleteSelectedMessage(item)" color="error">
-          mdi-delete
-        </v-icon>
+        <crud-actions
+          x-small
+          disable-details
+          disable-edit
+          @click:delete="openConfirmationAlert(item)"
+        ></crud-actions>
       </template>
     </v-data-table>
   </v-container>
 </template>
 
 <script>
-import { getVideoMeetings } from "@/api/video-meeting";
+import { getVideoMeetings, deleteVideoMeeting } from "@/api/video-meeting";
 
+import CrudActions from "@/components/CrudActions.vue";
 import SocialIcon from "@/components/SocialIcon.vue";
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
+
+import { errorMessage } from "@/utils/commonSwalMessages";
+
+import Swal from "sweetalert2";
 
 export default {
   name: "VideoMeetingView",
   components: {
+    CrudActions,
     DataTableToolbar,
     SocialIcon,
   },
@@ -76,6 +77,34 @@ export default {
         console.log(error);
       }
       this.loading = false;
+    },
+    async openConfirmationAlert(item) {
+      try {
+        const { isConfirmed } = await Swal.fire(errorMessage);
+        if (isConfirmed) {
+          new Swal({
+            title: "Wait please",
+            allowOutsideClick: false,
+          });
+
+          Swal.showLoading();
+
+          await this.deleteItem(item);
+
+          this.loadData();
+        }
+      } catch (error) {
+        Swal.fire(error?.message ?? "Error deleting item: ", "", "error");
+      }
+      Swal.hideLoading();
+    },
+
+    async deleteItem(item) {
+      const { success, msg } = await deleteVideoMeeting(item.id);
+
+      success
+        ? Swal.fire(msg ?? "Success", "", "success")
+        : Swal.fire(msg ?? "Error", "", "error");
     },
   },
 };
