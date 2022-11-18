@@ -25,7 +25,7 @@
           x-small
           disable-edit
           disable-details
-          @delete:click="deleteHiringRequest(item)"
+          @click:delete="openConfirmationAlert(item)"
         >
           <template #prepend>
             <v-btn x-small icon @click="openImagesDialog(item)" class="mr-3">
@@ -53,12 +53,15 @@
 </template>
 
 <script>
-import { getChatMeetings } from "@/api/chat-meeting";
+import { getChatMeetings, deleteChatMeeting } from "@/api/chat-meeting";
 
 import SocialIcon from "@/components/SocialIcon.vue";
 import DataTableToolbar from "@/components/DataTableToolbar.vue";
 import CrudActions from "@/components/CrudActions.vue";
+
 import Swal from "sweetalert2";
+
+import { errorMessage } from "@/utils/commonSwalMessages";
 
 export default {
   name: "ChatMeetingView",
@@ -109,6 +112,34 @@ export default {
     openImagesDialog(item) {
       this.selectedChatMeeting = item;
       this.isDialogImageOpen = true;
+    },
+    async openConfirmationAlert(item) {
+      try {
+        const { isConfirmed } = await Swal.fire(errorMessage);
+        if (isConfirmed) {
+          new Swal({
+            title: "Wait please",
+            allowOutsideClick: false,
+          });
+
+          Swal.showLoading();
+
+          await this.deleteItem(item);
+
+          this.loadData();
+        }
+      } catch (error) {
+        Swal.fire(error?.message ?? "Error deleting item: ", "", "error");
+      }
+      Swal.hideLoading();
+    },
+
+    async deleteItem(item) {
+      const { success, msg } = await deleteChatMeeting(item.id);
+
+      success
+        ? Swal.fire(msg ?? "Success", "", "success")
+        : Swal.fire(msg ?? "Error", "", "error");
     },
   },
 };
